@@ -1,0 +1,12 @@
+# Dify 插件核心依赖（必需）
+dify_plugin>=0.1.0,<0.2.0
+
+# EdgeTTS 核心依赖
+openai>=1.0.0              # OpenAI兼容的EdgeTTS API客户端
+requests>=2.31.0           # HTTP请求库
+
+# 配置和工具依赖
+pydantic>=2.0.0           # 数据验证（FastAPI兼容）
+
+# 可选：音频处理依赖
+# pydub>=0.25.0           # 音频格式转换（如需要）

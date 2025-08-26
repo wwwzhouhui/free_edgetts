@@ -1,0 +1,40 @@
+# EdgeTTS插件清单文件
+author: wwwzhouhui
+created_at: '2025-08-26T15:00:00.000000000Z'
+description:
+  en_US: EdgeTTS text-to-speech plugin powered by EdgeTTS API with local file storage
+  zh_CN: 基于 EdgeTTS API 的文本转语音插件，支持本地文件存储
+icon: icon.svg
+label:
+  en_US: EdgeTTS
+  zh_CN: EdgeTTS 语音合成
+
+# 元数据配置
+meta:
+  arch: [amd64, arm64]
+  runner:
+    entrypoint: main
+    language: python
+    version: '3.12'
+  version: 0.0.1
+
+# 插件配置
+name: free_edgetts
+plugins:
+  tools:
+  - provider/edgetts.yaml
+
+# 资源配置（TTS需要更多内存）
+resource:
+  memory: 2097152  # 2GB内存用于音频处理
+  permission:
+    model:
+      enabled: false
+      llm: false
+    tool:
+      enabled: true
+
+# 标签和类型
+tags: [utilities]
+type: plugin
+version: 0.0.1
