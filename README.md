@@ -1,254 +1,259 @@
-# EdgeTTS Dify 插件
+[中文](./README_CN.md) | English
 
-## 功能描述
-EdgeTTS 是一个基于 EdgeTTS API 的文本转语音 Dify 插件，兼容 OpenAI API 格式，支持多种中文语音、语速控制和音频格式输出。生成的音频文件保存在本地临时目录。
+[Project Source Code](https://github.com/wwwzhouhui/free_edgetts):
 
-## 核心特性
-- 🎵 支持多种中文语音（晓晓、云希、晓伊、云健等）
-- ⚡ 语速控制（0.25x - 4.0x）
-- 📁 多种音频格式（MP3、WAV、FLAC）
-- 💾 本地文件存储（保存到系统临时目录）
-- 🔒 安全的API密钥管理
-- 🚀 OpenAI API 格式兼容
-- 📊 实时处理进度显示
-- ✅ 完整的参数验证和错误处理
+# EdgeTTS Dify Plugin
 
-## 安装配置
+## Description
+EdgeTTS is a text-to-speech Dify plugin based on the EdgeTTS API, compatible with the OpenAI API format. It supports multiple Chinese voices, speed control, and audio format output. Generated audio files are saved to the local temporary directory.
 
-### 依赖要求
+## Core Features
+- 🎵 Supports multiple Chinese voices (Xiaoxiao, Yunxi, Xiaoyi, Yunjian, etc.)
+- ⚡ Speed control (0.25x - 4.0x)
+- 📁 Multiple audio formats (MP3, WAV, FLAC)
+- 💾 Local file storage (saved to system temporary directory)
+- 🔒 Secure API key management
+- 🚀 OpenAI API format compatible
+- 📊 Real-time processing progress display
+- ✅ Complete parameter validation and error handling
+
+## Installation and Configuration
+
+### Requirements
 - Python 3.12+
 - dify_plugin >= 0.1.0, < 0.2.0
 - openai >= 1.0.0
 - requests >= 2.31.0
 - pydantic >= 2.0.0
 
-### 技术栈
-- **Dify Plugin Framework**: 基于 Dify 插件框架构建
-- **OpenAI Compatible API**: 使用 OpenAI 客户端库调用 EdgeTTS API
-- **异步处理**: 支持生成器模式的流式处理
-- **数据验证**: 使用 Pydantic 进行参数验证
-- **错误处理**: 完整的异常处理和用户友好的错误消息
+### Tech Stack
+- **Dify Plugin Framework**: Built on the Dify plugin framework
+- **OpenAI Compatible API**: Uses OpenAI client library to call EdgeTTS API
+- **Asynchronous Processing**: Supports generator-based streaming processing
+- **Data Validation**: Uses Pydantic for parameter validation
+- **Error Handling**: Complete exception handling and user-friendly error messages
 
-### EdgeTTS API Key 获取
-1. 访问 EdgeTTS 服务提供商：https://edgettsapi.duckcloud.fun
-2. 注册账户并获取 API Key
-3. 确保 API Key 兼容 OpenAI API 格式
+### EdgeTTS API Key Acquisition
+1. Visit the EdgeTTS service provider: https://edgettsapi.duckcloud.fun
+2. Register an account and obtain an API Key
+3. Ensure the API Key is compatible with the OpenAI API format
 
-### 插件安装
-1. 将插件目录复制到 Dify 插件目录
-2. 在 Dify 管理界面中启用 EdgeTTS 插件
-3. 配置必要的认证信息
+### Plugin Installation
+1. Copy the plugin directory to the Dify plugins directory
+2. Enable the EdgeTTS plugin in the Dify management interface
+3. Configure the necessary authentication information
 
-### 配置说明
-在 Dify 插件管理界面配置以下参数：
+### Configuration Instructions
+Configure the following parameters in the Dify plugin management interface:
 
-#### 必需配置
-- **EdgeTTS API Key**：从 EdgeTTS 服务提供商获取的 API 密钥
-  - 类型：加密输入
-  - 说明：兼容 OpenAI API 格式的认证密钥
+#### Required Configuration
+- **EdgeTTS API Key**: API key obtained from the EdgeTTS service provider
+  - Type: Encrypted input
+  - Description: Authentication key compatible with OpenAI API format
 
-#### 可选配置  
-- **API Base URL**：EdgeTTS API 基础地址
-  - 默认值：https://edgettsapi.duckcloud.fun/v1
-  - 类型：文本输入
-  - 说明：可自定义 EdgeTTS API 服务器地址
+#### Optional Configuration  
+- **API Base URL**: EdgeTTS API base address
+  - Default: https://edgettsapi.duckcloud.fun/v1
+  - Type: Text input
+  - Description: Customizable EdgeTTS API server address
 
-## 使用方法
+## Usage
 
-### 基本用法
-1. 在 Dify 工作流中添加 EdgeTTS 插件
-2. 输入要转换的文本内容
-3. 选择语音模型和参数
-4. 获取生成的音频文件（保存到本地临时目录）
+### Basic Usage
+1. Add the EdgeTTS plugin to your Dify workflow
+2. Enter the text content to be converted
+3. Select the voice model and parameters
+4. Obtain the generated audio file (saved to local temporary directory)
 
-### 详细参数说明
+### Detailed Parameter Description
 
-#### 文本内容 (input_text)
-- **类型**: 字符串 (必需)
-- **描述**: 要转换为语音的文本内容
-- **限制**: 最大 5000 字符
-- **支持**: 中文及其他支持的语言
+#### Text Content (input_text)
+- **Type**: String (Required)
+- **Description**: Text content to be converted to speech
+- **Limit**: Maximum 5000 characters
+- **Support**: Chinese and other supported languages
 
-#### 语音模型 (voice)  
-- **类型**: 下拉选择 (可选)
-- **默认值**: zh-CN-XiaoxiaoNeural
-- **可选项**:
-  - `zh-CN-XiaoxiaoNeural`: 晓晓（中文女声）
-  - `zh-CN-YunxiNeural`: 云希（中文男声）
-  - `zh-CN-XiaoyiNeural`: 晓伊（中文女声）
-  - `zh-CN-YunjianNeural`: 云健（中文男声）
+#### Voice Model (voice)  
+- **Type**: Dropdown selection (Optional)
+- **Default**: zh-CN-XiaoxiaoNeural
+- **Options**:
+  - `zh-CN-XiaoxiaoNeural`: Xiaoxiao (Chinese female voice)
+  - `zh-CN-YunxiNeural`: Yunxi (Chinese male voice)
+  - `zh-CN-XiaoyiNeural`: Xiaoyi (Chinese female voice)
+  - `zh-CN-YunjianNeural`: Yunjian (Chinese male voice)
 
-#### TTS 模型 (model)
-- **类型**: 下拉选择 (可选)  
-- **默认值**: tts-1
-- **可选项**:
-  - `tts-1`: 标准质量，处理速度快
-  - `tts-1-hd`: 高质量，音频效果更佳
+#### TTS Model (model)
+- **Type**: Dropdown selection (Optional)  
+- **Default**: tts-1
+- **Options**:
+  - `tts-1`: Standard quality, fast processing
+  - `tts-1-hd`: High quality, better audio effect
 
-#### 语音速度 (speed)
-- **类型**: 数值 (可选)
-- **默认值**: 1.0
-- **范围**: 0.25 - 4.0
-- **说明**: 1.0 为正常速度，0.25 最慢，4.0 最快
+#### Speech Speed (speed)
+- **Type**: Numeric (Optional)
+- **Default**: 1.0
+- **Range**: 0.25 - 4.0
+- **Description**: 1.0 is normal speed, 0.25 is slowest, 4.0 is fastest
 
-#### 音频格式 (response_format)
-- **类型**: 下拉选择 (可选)
-- **默认值**: mp3
-- **可选项**:
-  - `mp3`: MP3 格式（推荐，兼容性好）
-  - `wav`: WAV 格式（无损音质）
-  - `flac`: FLAC 格式（无损压缩）
+#### Audio Format (response_format)
+- **Type**: Dropdown selection (Optional)
+- **Default**: mp3
+- **Options**:
+  - `mp3`: MP3 format (recommended, good compatibility)
+  - `wav`: WAV format (lossless quality)
+  - `flac`: FLAC format (lossless compression)
 
-### 使用示例
+### Usage Example
 ```
-输入文本："欢迎使用EdgeTTS插件，这是一个高质量的文本转语音服务。"
-语音模型：zh-CN-XiaoxiaoNeural (晓晓)
-TTS模型：tts-1 (标准)
-语速：1.0x (正常速度)
-格式：mp3
-输出：生成高质量的中文女声MP3音频文件
-保存位置：系统临时目录（如 /tmp/edgetts_audio_1693123456.mp3）
+Input text: "Welcome to use EdgeTTS plugin, this is a high-quality text-to-speech service."
+Voice model: zh-CN-XiaoxiaoNeural (Xiaoxiao)
+TTS model: tts-1 (standard)
+Speed: 1.0x (normal speed)
+Format: mp3
+Output: Generate high-quality Chinese female voice MP3 audio file
+Save location: System temporary directory (e.g. /tmp/edgetts_audio_1693123456.mp3)
 ```
 
-### 处理流程
-插件执行时会显示详细的处理进度：
-1. 🚀 开始生成语音...
-2. 📝 文本长度验证
-3. 🎵 语音模型确认  
-4. ⚡ 语速设置确认
-5. 🔄 正在调用EdgeTTS API...
-6. ✅ 语音生成成功
-7. 📊 音频大小统计
-8. 💾 正在保存音频文件到本地...
-9. 🎉 语音转换完成！
+### Processing Flow
+The plugin displays detailed processing progress during execution:
+1. 🚀 Starting voice generation...
+2. 📝 Text length validation
+3. 🎵 Voice model confirmation  
+4. ⚡ Speed setting confirmation
+5. 🔄 Calling EdgeTTS API...
+6. ✅ Voice generation successful
+7. 📊 Audio size statistics
+8. 💾 Saving audio file to local...
+9. 🎉 Voice conversion completed!
 
-## 故障排除
+## Troubleshooting
 
-### 常见问题
-1. **API Key 无效**：检查 EdgeTTS API Key 是否正确
-2. **连接超时**：检查网络连接和 API Base URL
-3. **文本过长**：确保文本长度不超过5000字符
-4. **本地保存失败**：检查本地磁盘空间和权限
+### Common Issues
+1. **Invalid API Key**: Check if the EdgeTTS API Key is correct
+2. **Connection timeout**: Check network connection and API Base URL
+3. **Text too long**: Ensure text length does not exceed 5000 characters
+4. **Local save failure**: Check local disk space and permissions
 
-### 错误代码
-- 401：API Key 无效或已过期
-- 403：API Key 权限不足
-- 404：API 端点不存在
-- 429：API 调用频率过高
-- 500：服务器内部错误
+### Error Codes
+- 401: API Key invalid or expired
+- 403: API Key insufficient permissions
+- 404: API endpoint not found
+- 429: API call rate too high
+- 500: Server internal error
 
-## 项目结构
+## Project Structure
 ```
-free_edgetts/                    # 插件根目录
-├── manifest.yaml                # 插件清单文件（定义插件元数据和配置）
-├── main.py                      # 插件入口文件（启动插件服务器）
-├── requirements.txt             # Python 依赖管理
-├── README.md                    # 项目文档
-├── test_edgetts_fixed.py        # 测试文件
-├── _assets/                     # 静态资源目录
-│   └── icon.svg                 # 插件图标
-├── provider/                    # 服务提供者配置
+free_edgetts/                    # Plugin root directory
+├── manifest.yaml                # Plugin manifest file (defines plugin metadata and configuration)
+├── main.py                      # Plugin entry file (starts plugin server)
+├── requirements.txt             # Python dependency management
+├── README.md                    # Project documentation
+├── PRIVACY.md                   # Privacy policy
+├── test_edgetts_fixed.py        # Test file
+├── _assets/                     # Static resources directory
+│   └── icon.svg                 # Plugin icon
+├── provider/                    # Service provider configuration
 │   ├── __init__.py
-│   ├── edgetts.yaml            # 提供者配置（认证、工具列表）
-│   └── edgetts_provider.py     # 提供者实现（凭据验证逻辑）
-├── tools/                       # TTS 工具实现
+│   ├── edgetts.yaml            # Provider configuration (authentication, tool list)
+│   └── edgetts_provider.py     # Provider implementation (credential validation logic)
+├── tools/                       # TTS tool implementation
 │   ├── __init__.py
-│   ├── text_to_speech.yaml     # 工具配置（参数定义）
-│   └── text_to_speech.py       # 工具实现（核心 TTS 逻辑）
-└── utils/                       # 工具类目录（预留）
+│   ├── text_to_speech.yaml     # Tool configuration (parameter definition)
+│   └── text_to_speech.py       # Tool implementation (core TTS logic)
+└── utils/                       # Utility directory (reserved)
     └── __init__.py
 ```
 
-### 核心文件说明
+### Core File Description
 
 #### manifest.yaml
-- 定义插件基本信息（名称、版本、作者）
-- 配置运行环境（Python 3.12、内存分配 2GB）
-- 指定工具提供者和权限设置
+- Defines plugin basic information (name, version, author)
+- Configures runtime environment (Python 3.12, 2GB memory allocation)
+- Specifies tool providers and permission settings
 
 #### provider/edgetts_provider.py
-- 实现 `EdgeTTSProvider` 类，继承自 `ToolProvider`
-- 提供凭据验证功能（`_validate_credentials`）
-- 测试 EdgeTTS API 连接可用性
+- Implements `EdgeTTSProvider` class, inheriting from `ToolProvider`
+- Provides credential validation functionality (`_validate_credentials`)
+- Tests EdgeTTS API connection availability
 
 #### tools/text_to_speech.py
-- 实现 `TextToSpeechTool` 类，继承自 `Tool`  
-- 核心 TTS 转换逻辑（`_invoke` 方法）
-- 参数验证、API 调用、音频文件保存
-- 完整的错误处理和用户反馈
+- Implements `TextToSpeechTool` class, inheriting from `Tool`  
+- Core TTS conversion logic (`_invoke` method)
+- Parameter validation, API calls, audio file saving
+- Complete error handling and user feedback
 
-## 开发和测试
+## Development and Testing
 
-### 本地开发环境设置
-1. **环境要求**
+### Local Development Environment Setup
+1. **Environment Requirements**
    ```bash
    Python 3.12+
    pip >= 21.0
    ```
 
-2. **安装依赖**
+2. **Install Dependencies**
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **本地测试**  
+3. **Local Testing**  
    ```bash
-   python main.py          # 启动插件服务器
-   python test_edgetts_fixed.py  # 运行测试用例
+   python main.py          # Start plugin server
+   python test_edgetts_fixed.py  # Run test cases
    ```
 
-### 测试说明
-- `test_edgetts_fixed.py`: 包含 EdgeTTS API 连接和功能测试
-- 测试涵盖：参数验证、API 调用、音频生成、错误处理
-- 建议在修改代码后运行测试确保功能正常
+### Testing Instructions
+- `test_edgetts_fixed.py`: Contains EdgeTTS API connection and functionality tests
+- Tests cover: parameter validation, API calls, audio generation, error handling
+- It is recommended to run tests after code modifications to ensure functionality
 
-### 调试技巧
-1. **日志输出**: 插件运行时会显示详细的处理状态
-2. **参数验证**: 检查输入参数是否符合要求
-3. **API 连接**: 验证 EdgeTTS API Key 和 Base URL 配置
-4. **本地存储**: 检查系统临时目录的写入权限
+### Debugging Tips
+1. **Log Output**: The plugin displays detailed processing status during runtime
+2. **Parameter Validation**: Check if input parameters meet requirements
+3. **API Connection**: Verify EdgeTTS API Key and Base URL configuration
+4. **Local Storage**: Check write permissions for the system temporary directory
 
-### 插件配置文件
-- `manifest.yaml`: 插件元数据和运行配置
-- `provider/edgetts.yaml`: 认证参数和工具列表定义  
-- `tools/text_to_speech.yaml`: 工具参数配置和用户界面定义
+### Plugin Configuration Files
+- `manifest.yaml`: Plugin metadata and runtime configuration
+- `provider/edgetts.yaml`: Authentication parameters and tool list definition  
+- `tools/text_to_speech.yaml`: Tool parameter configuration and user interface definition
 
-## 版本信息
-- **当前版本**: v0.0.1
-- **作者**: wwwzhouhui
-- **支持架构**: AMD64, ARM64  
-- **运行环境**: Python 3.12
-- **插件类型**: Dify 工具插件
-- **分类**: 实用工具 (utilities)
+## Version Information
+- **Current Version**: v0.0.1
+- **Author**: wwwzhouhui
+- **Supported Architectures**: AMD64, ARM64  
+- **Runtime Environment**: Python 3.12
+- **Plugin Type**: Dify Tool Plugin
+- **Category**: Utilities
 
-## 更新日志
+## Changelog
 
 ### v0.0.1 (2025-08-26)
-**初始版本发布**
-- ✨ 完整的 EdgeTTS 文本转语音功能
-- 🔧 OpenAI API 格式兼容
-- 🎵 支持多种中文语音模型（晓晓、云希、晓伊、云健）
-- ⚡ 语速控制（0.25x - 4.0x）
-- 📁 多格式音频输出（MP3、WAV、FLAC）
-- 💾 本地临时目录文件存储
-- 🔒 安全的 API 密钥管理
-- ✅ 完整的参数验证和错误处理
-- 📊 实时处理进度显示
-- 🧪 包含测试用例和开发文档
+**Initial Release**
+- ✨ Complete EdgeTTS text-to-speech functionality
+- 🔧 OpenAI API format compatible
+- 🎵 Support for multiple Chinese voice models (Xiaoxiao, Yunxi, Xiaoyi, Yunjian)
+- ⚡ Speed control (0.25x - 4.0x)
+- 📁 Multi-format audio output (MP3, WAV, FLAC)
+- 💾 Local temporary directory file storage
+- 🔒 Secure API key management
+- ✅ Complete parameter validation and error handling
+- 📊 Real-time processing progress display
+- 🧪 Includes test cases and development documentation
 
-**技术特性**
-- 基于 Dify Plugin Framework 构建
-- 使用生成器模式支持流式处理
-- 完整的异常处理机制
-- 2GB 内存分配用于音频处理
-- 支持最大 5000 字符文本输入
+**Technical Features**
+- Built on Dify Plugin Framework
+- Uses generator pattern to support streaming processing
+- Complete exception handling mechanism
+- 2GB memory allocation for audio processing
+- Supports maximum 5000 character text input
 
-## 许可证
-本项目遵循开源协议，具体许可证信息请查看项目根目录。
+## License
+This project follows an open-source license. See the project root directory for specific license information.
 
-## 贡献
-欢迎提交 Issue 和 Pull Request 来改进这个项目。
+## Contributing
+Welcome to submit Issues and Pull Requests to improve this project.
 
-## 联系方式
-- 作者：wwwzhouhui
-- EdgeTTS API 服务：https://edgettsapi.duckcloud.fun
+## Contact
+- Author: wwwzhouhui
+- EdgeTTS API Service: https://edgettsapi.duckcloud.fun
